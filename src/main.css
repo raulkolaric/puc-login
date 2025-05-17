@@ -19,15 +19,30 @@ body {
 }
 
 .login input{
-    background-color: #091031;
+    background-color: #0c143a;
     border-radius: 10px;
-    height: 25px;
+    height: 30px;
+    border-width: 2px;
     border-color:aliceblue;
     border-style: solid;
     color: aliceblue;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.login input::placeholder {
+    color: rgb(150, 162, 175);
+    font-style: italic;
+    font-family: 'Poppins', sans-serif;
+    
 }
 
 .login input:focus {
     outline: none;
     border-color: aliceblue;
+    transform: scale(1.03);
+}
+
+.login-input {
+    display: grid;
+    gap: 5px;
 }

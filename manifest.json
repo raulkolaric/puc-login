@@ -3,8 +3,12 @@
   "description": "Automatic login to PUC-SP",
   "version": "1.0",
   "manifest_version": 3,
+  "permissions": ["storage", "activeTab", "scripting"],
   "action": {
     "default_popup": "src/main.html",
     "default_icon": "public/puc128.png"
+  },
+  "background": {
+    "service_worker": "src/background.js"
   }
 }
