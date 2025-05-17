@@ -1,0 +1,33 @@
+body {
+    background-color: #12205d;
+    font-family: 'Poppins', sans-serif;
+    color: aliceblue;
+    margin: 0;
+    padding: 20px;  
+    height: 300px;
+    width: 200px;
+}   
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header h1 {
+    font-size: 24px;
+    padding-top: 10px;
+}
+
+.login input{
+    background-color: #091031;
+    border-radius: 10px;
+    height: 25px;
+    border-color:aliceblue;
+    border-style: solid;
+    color: aliceblue;
+}
+
+.login input:focus {
+    outline: none;
+    border-color: aliceblue;
+}
