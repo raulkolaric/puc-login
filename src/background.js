@@ -5,45 +5,63 @@ const LOGIN_PAGE_URL = "https://portal.fundasp.org.br/FrameHTML/web/app/edu/Port
 chrome.webNavigation.onCommitted.addListener((details) => {
   // Ensure this is the main frame (frameId === 0) and not an iframe.
   // Also, ensure we are not already on the login page to prevent redirect loops.
-  if (details.frameId === 0 && details.url !== LOGIN_PAGE_URL) {
+  if (details.frameId === 0 && !details.url.startsWith(LOGIN_PAGE_URL)) {
     chrome.storage.local.get(
       ["redirectPortalEnabled", "redirectPucHomeEnabled"],
       (data) => {
         if (chrome.runtime.lastError) {
-          console.error("Error retrieving from storage:", chrome.runtime.lastError);
+          console.error("PUC-SP Extension: Error retrieving from storage:", chrome.runtime.lastError);
           return;
         }
 
-        const currentUrl = details.url;
+        const currentUrl = new URL(details.url); // Use URL object for easier parsing
+        const currentOriginAndPath = currentUrl.origin + currentUrl.pathname; // e.g., "https://portal.fundasp.org.br/"
 
-        // 1. Handle redirect for portal.fundasp.org.br
+        // 1. Handle redirect for portal.fundasp.org.br (including variants with query params)
         if (data.redirectPortalEnabled) {
-          // Redirect if the user is exactly on https://portal.fundasp.org.br/
-          if (currentUrl === "https://portal.fundasp.org.br/" || currentUrl === "http://portal.fundasp.org.br/") {
+          if (
+            (currentOriginAndPath === "https://portal.fundasp.org.br/" ||
+             currentOriginAndPath === "http://portal.fundasp.org.br/")
+          ) {
+            console.log(`PUC-SP Extension: Redirecting from ${details.url} to ${LOGIN_PAGE_URL} (Portal)`);
             chrome.tabs.update(details.tabId, { url: LOGIN_PAGE_URL }, () => {
               if (chrome.runtime.lastError) {
-                console.error("Error updating tab for portal redirect:", chrome.runtime.lastError.message);
+                console.error("PUC-SP Extension: Error updating tab for portal redirect:", chrome.runtime.lastError.message);
               }
             });
-            return; // Redirect initiated, no need to check other conditions for this event
+            return;
           }
         }
 
-        // 2. Handle redirect for www.pucsp.br/home (and variants like www.pucsp.br/home#)
+        // 2. Handle redirect for PUC SP home pages
         if (data.redirectPucHomeEnabled) {
-          // details.url will give something like "https://www.pucsp.br/home"
-          // The fragment (#) is client-side and might not be in details.url directly,
-          // but this check covers the base path.
-          if (currentUrl.startsWith("https://www.pucsp.br/home") || currentUrl.startsWith("http://www.pucsp.br/home")) {
-            // Further check to ensure it's /home or /home/ and not /home-something-else
-            const urlPath = new URL(currentUrl).pathname;
-            if (urlPath === "/home" || urlPath === "/home/") {
-              chrome.tabs.update(details.tabId, { url: LOGIN_PAGE_URL }, () => {
-                if (chrome.runtime.lastError) {
-                  console.error("Error updating tab for PUC Home redirect:", chrome.runtime.lastError.message);
-                }
-              });
+          const normalizedUrlForPucHome = details.url.toLowerCase(); // Normalize for easier comparison
+
+          if (
+            normalizedUrlForPucHome.startsWith("https://www.pucsp.br/home") ||
+            normalizedUrlForPucHome.startsWith("http://www.pucsp.br/home") ||
+            normalizedUrlForPucHome.startsWith("https://www5.pucsp.br/paginainicial") // Check without trailing slash for flexibility
+          ) {
+            // For www.pucsp.br/home, ensure it's exactly /home or /home/
+            if (normalizedUrlForPucHome.startsWith("https://www.pucsp.br/home") || normalizedUrlForPucHome.startsWith("http://www.pucsp.br/home")) {
+              if (currentUrl.pathname !== "/home" && currentUrl.pathname !== "/home/") {
+                return; // Not the exact /home or /home/ path, so don't redirect
+              }
             }
+            // For www5.pucsp.br/paginainicial, ensure it's exactly /paginainicial or /paginainicial/
+            if (normalizedUrlForPucHome.startsWith("https://www5.pucsp.br/paginainicial")) {
+               if (currentUrl.pathname !== "/paginainicial" && currentUrl.pathname !== "/paginainicial/") {
+                return; // Not the exact /paginainicial or /paginainicial/ path, so don't redirect
+               }
+            }
+
+            console.log(`PUC-SP Extension: Redirecting from ${details.url} to ${LOGIN_PAGE_URL} (PUC Home)`);
+            chrome.tabs.update(details.tabId, { url: LOGIN_PAGE_URL }, () => {
+              if (chrome.runtime.lastError) {
+                console.error("PUC-SP Extension: Error updating tab for PUC Home redirect:", chrome.runtime.lastError.message);
+              }
+            });
+            return; // Redirect initiated
           }
         }
       }
@@ -51,25 +69,22 @@ chrome.webNavigation.onCommitted.addListener((details) => {
   }
 }, {
   // URL filters to make the listener more efficient.
-  // It will only trigger for navigations matching these patterns.
   url: [
-    { urlEquals: "https://portal.fundasp.org.br/" },
-    { urlEquals: "http://portal.fundasp.org.br/" },
-    { hostEquals: "www.pucsp.br", pathPrefix: "/home" } // Catches /home and /home/
+    { hostEquals: "portal.fundasp.org.br", pathEquals: "/" },
+    { hostEquals: "www.pucsp.br", pathPrefix: "/home" }, // Catches www.pucsp.br/home...
+    { hostEquals: "www5.pucsp.br", pathPrefix: "/paginainicial" } // <<<< ADDED THIS LINE
   ]
 });
 
-// Optional: Log when the extension is installed or updated for debugging
 chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === "install") {
     console.log("PUC-SP Login Helper installed.");
-    // Initialize default settings here if needed, though your popup script handles defaults on load.
     chrome.storage.local.set({
         autoFillEnabled: true,
         redirectPortalEnabled: false,
         redirectPucHomeEnabled: false
     });
   } else if (details.reason === "update") {
-    console.log("PUC-SP Login Helper updated.");
+    console.log("PUC-SP Login Helper updated to version " + chrome.runtime.getManifest().version);
   }
 });

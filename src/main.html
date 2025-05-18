@@ -9,9 +9,9 @@
 <body>
     <div class="header">
         <h1>PUC-SP</h1>
-        <img src="../public/puc-main.png" alt="PUC-SP Logo" width="75">
+        <img src="../public/puc-main.png" alt="PUC-SP Logo" width="60">
     </div>
-
+    
     <div class="section">
         <div class="container">
             <h2>Login Automático</h2>
@@ -23,6 +23,19 @@
             <input id="RA" type="text" autocomplete="off" placeholder="RA">
             <input id="SENHA" type="password" placeholder="Senha">
         </div>
+    
+    </div>
+    
+    <div class="section">
+        <div class="container">
+            <h2>Login Acervo</h2>
+            <input class="toggleFill" id="acervoLoginToggle" type="checkbox">
+            <label for="acervoLoginToggle"></label>
+        </div>
+        <p class="description">Preenche automaticamente seu RA e senha na página do Acervo. Fique atento ao bloqueio de Pop-up.</p>
+        <div class="login-input">
+            <input id="SENHA-ACERVO" type="password" placeholder="P@CPF (Senha do Acervo)">
+        </div>
     </div>
 
     <div class="section">
@@ -31,18 +44,18 @@
             <input class="toggleFill" id="redirectPortalToggle" type="checkbox">
             <label for="redirectPortalToggle"></label>
         </div>
-        <p class="description">Redireciona automaticamente <code>portal.fundasp.org.br</code> para a página de login.</p>
+        <p class="description">Redireciona <code>portal.fundasp.org.br</code> para a página de login.</p>
     </div>
 
     <div class="section">
         <div class="container">
-            <h2>Redirecionar PUC Home</h2>
+            <h2>Redirecionar PUC</h2>
             <input class="toggleFill" id="redirectPucHomeToggle" type="checkbox">
             <label for="redirectPucHomeToggle"></label>
         </div>
-        <p class="description">Redireciona automaticamente <code>www.pucsp.br/home#</code> para a página de login.</p>
+        <p class="description">Redireciona <code>www.pucsp.br/home#</code> para a página de login.</p>
     </div>
-    <!-- Removed the generic "This is the main content of the page." as it seemed like a placeholder -->
+
     <script src="input.js"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 {
   "name": "PucLogin",
   "description": "Automatic login and redirects for PUC-SP portals.",
-  "version": "1.2",
+  "version": "1.3",
   "manifest_version": 3,
   "permissions": [
     "storage",
@@ -13,23 +13,29 @@
     "https://portal.fundasp.org.br/*",
     "http://portal.fundasp.org.br/*",
     "https://www.pucsp.br/*",
-    "http://www.pucsp.br/*"
+    "http://www.pucsp.br/*",
+    "https://pergamum.pucsp.br/*" 
   ],
   "action": {
     "default_popup": "src/main.html",
-    "default_icon": "public/puc-main.png" 
+    "default_icon": "public/puc-main.png"
   },
   "background": {
-    "service_worker": "src/background.js" 
+    "service_worker": "src/background.js"
   },
   "content_scripts": [
     {
       "matches": ["https://portal.fundasp.org.br/FrameHTML/web/app/edu/PortalEducacional/login/*"],
       "js": ["src/contentScript.js"],
       "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://pergamum.pucsp.br/acervo/*"],
+      "js": ["src/acervoContentScript.js"],
+      "run_at": "document_idle"
     }
   ],
-  "icons": { 
+  "icons": {
     "128": "public/puc128.png"
   }
 }
