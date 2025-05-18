@@ -1,6 +1,6 @@
 # 🔐 Extensão PUC-SP AutoLogin
 
-Uma extensão Chrome elegante e consciente da privacidade que armazena seu **RA** e **Senha** localmente, permitindo **login automático** no [Portal PUC-SP](https://portal.fundasp.org.br/FrameHTML/web/app/edu/PortalEducacional/login/).
+Uma extensão Chrome elegante e consciente da privacidade que armazena seu **RA** e **Senha** localmente, permitindo **login automático** no [Portal PUC-SP](https://portal.fundasp.org.br/FrameHTML/web/app/edu/PortalEducacional/login/), e outras funcionalidades, como: **Login automático no Acervo (Biblioteca Digital)**, e 2 redirects para a página de login.
 
 <div align="center">
   <img src="public/puc-main.png" alt="Logo PUC-SP" width="120"/>
