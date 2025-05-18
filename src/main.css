@@ -3,19 +3,56 @@ body {
     font-family: 'Poppins', sans-serif;
     color: aliceblue;
     margin: 0;
-    padding: 20px;  
-    height: 300px;
-    width: 200px;
-}   
+    padding: 15px; /* Adjusted padding slightly */
+    height: auto; /* Allow height to adjust to content */
+    min-height: 350px; /* Minimum height */
+    width: 250px; /* Adjusted width slightly */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
 
 .header {
     display: flex;
     justify-content: space-between;
+    align-items: center; /* Vertically align items */
+    margin-bottom: 15px; /* Add some space below the header */
 }
 
 .header h1 {
     font-size: 24px;
-    padding-top: 10px;
+    margin: 0; /* Remove default margin */
+}
+
+.section {
+    margin-bottom: 15px; /* Space between sections */
+}
+
+.section:last-child {
+    margin-bottom: 0; /* No margin for the last section */
+}
+
+.section h2 {
+  margin: 0 0 5px 0; /* Adjust heading margin */
+  font-size: 18px; /* Slightly smaller heading for sections */
+}
+
+.description {
+    font-size: 0.75em;
+    color: #cccccc;
+    margin-top: 2px;
+    margin-bottom: 8px;
+}
+
+.description code { /* Style for the code element in descriptions */
+    background-color: #0c143a;
+    padding: 1px 3px;
+    border-radius: 3px;
+    font-size: 0.95em;
+}
+
+
+.login-input {
+    display: grid; /* Changed to grid */
+    gap: 8px;      /* Add gap between input fields */
 }
 
 .login-input input{
@@ -27,15 +64,15 @@ body {
     border-style: solid;
     color: aliceblue;
     transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-    display: grid;
-    gap: 5px;
+    padding-left: 10px; /* Add some padding for text */
+    width: calc(100% - 24px); /* Adjust width to account for padding and border */
+    box-sizing: border-box;
 }
 
 .login-input input::placeholder {
     color: rgb(150, 162, 175);
     font-style: italic;
     font-family: 'Poppins', sans-serif;
-    
 }
 
 .login-input input:focus {
@@ -47,15 +84,11 @@ body {
 .container {
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding-top: 7px;
+    gap: 8px; /* Increased gap slightly */
+    /* padding-top: 7px; Removed as section h2 has margin now */
 }
 
-.container h2 {
-  margin: 0;
-}
-
-
+/* Toggle switch styles remain the same */
 .toggleFill {
   opacity: 0;
   width: 0;
@@ -66,10 +99,10 @@ body {
 .toggleFill + label {
   position: relative;
   display: inline-block;
-  width: 26px;
-  height: 14px;
+  width: 26px; /* Width of the toggle background */
+  height: 14px; /* Height of the toggle background */
   background-color: #ccc;
-  border-radius: 17px;
+  border-radius: 17px; /* Make it pill-shaped */
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -77,19 +110,19 @@ body {
 .toggleFill + label::before {
   content: "";
   position: absolute;
-  left: 2px;
-  top: 2px;
-  width: 10px;
-  height: 10px;
+  left: 2px;   /* Position from the left of the label */
+  top: 2px;    /* Position from the top of the label */
+  width: 10px;  /* Width of the switch */
+  height: 10px; /* Height of the switch */
   background-color: white;
-  border-radius: 50%;
+  border-radius: 50%; /* Make it circular */
   transition: transform 0.3s ease;
 }
 
 .toggleFill:checked + label {
-  background-color: #4caf50;
+  background-color: #4caf50; /* Green when checked */
 }
 
 .toggleFill:checked + label::before {
-  transform: translateX(12px);
+  transform: translateX(12px); /* Move the switch to the right */
 }

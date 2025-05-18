@@ -29,10 +29,6 @@ PUCLogin/
 ├── manifest.json # Chrome extension config
 └── README.md # This file
 
-pgsql
-Copy
-Edit
-
 ## 🔧 How to Use (Dev Mode)
 
 1. Clone or download this repository.

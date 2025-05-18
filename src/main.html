@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>PUC-SP Extension</title>
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
@@ -11,19 +11,38 @@
         <h1>PUC-SP</h1>
         <img src="../public/puc-main.png" alt="PUC-SP Logo" width="75">
     </div>
-    <div class="login">
+
+    <div class="section">
         <div class="container">
             <h2>Login Automático</h2>
-            <input class="toggleFill" id="'autofillToggle'" type="checkbox">
-            <label for="autoFillEnabled"></label>
+            <input class="toggleFill" id="autofillToggle" type="checkbox">
+            <label for="autofillToggle"></label>
         </div>
-        <p>Seu login é guardado localmente no navegador.</p>
+        <p class="description">Salva e preenche automaticamente seu RA e senha na página de login. Suas credenciais são guardadas localmente.</p>
         <div class="login-input">
-            <input id="RA" type="text" autocomplete="off" id="username" placeholder="RA">
-            <input id="SENHA" type="password" placeholder="Senha">            
+            <input id="RA" type="text" autocomplete="off" placeholder="RA">
+            <input id="SENHA" type="password" placeholder="Senha">
         </div>
     </div>
-    <p>This is the main content of the page.</p>
+
+    <div class="section">
+        <div class="container">
+            <h2>Redirecionar Portal</h2>
+            <input class="toggleFill" id="redirectPortalToggle" type="checkbox">
+            <label for="redirectPortalToggle"></label>
+        </div>
+        <p class="description">Redireciona automaticamente <code>portal.fundasp.org.br</code> para a página de login.</p>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>Redirecionar PUC Home</h2>
+            <input class="toggleFill" id="redirectPucHomeToggle" type="checkbox">
+            <label for="redirectPucHomeToggle"></label>
+        </div>
+        <p class="description">Redireciona automaticamente <code>www.pucsp.br/home#</code> para a página de login.</p>
+    </div>
+    <!-- Removed the generic "This is the main content of the page." as it seemed like a placeholder -->
     <script src="input.js"></script>
 </body>
 </html>
