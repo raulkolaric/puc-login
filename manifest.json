@@ -1,7 +1,7 @@
 {
   "name": "PucLogin",
   "description": "Automatic login and redirects for PUC-SP portals.",
-  "version": "1.1",
+  "version": "1.2",
   "manifest_version": 3,
   "permissions": [
     "storage",
@@ -17,15 +17,10 @@
   ],
   "action": {
     "default_popup": "src/main.html",
-    "default_icon": {
-      "16": "public/puc_icon16.png",
-      "32": "public/puc_icon32.png",
-      "48": "public/puc_icon48.png",
-      "128": "public/puc128.png"
-    }
+    "default_icon": "public/puc-main.png" 
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "src/background.js" 
   },
   "content_scripts": [
     {
@@ -34,10 +29,7 @@
       "run_at": "document_idle"
     }
   ],
-  "icons": {
-    "16": "public/puc_icon16.png",
-    "32": "public/puc_icon32.png",
-    "48": "public/puc_icon48.png",
+  "icons": { 
     "128": "public/puc128.png"
   }
 }
