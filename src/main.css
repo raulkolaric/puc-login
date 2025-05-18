@@ -62,7 +62,7 @@ body {
     border-width: 2px;
     border-color:aliceblue;
     border-style: solid;
-    color: aliceblue;
+    color: rgb(165, 178, 189);
     transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
     padding-left: 10px; /* Add some padding for text */
     width: calc(100% - 24px); /* Adjust width to account for padding and border */
@@ -101,7 +101,7 @@ body {
   display: inline-block;
   width: 26px; /* Width of the toggle background */
   height: 14px; /* Height of the toggle background */
-  background-color: #ccc;
+  background-color: #777777;
   border-radius: 17px; /* Make it pill-shaped */
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -114,13 +114,13 @@ body {
   top: 2px;    /* Position from the top of the label */
   width: 10px;  /* Width of the switch */
   height: 10px; /* Height of the switch */
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   border-radius: 50%; /* Make it circular */
   transition: transform 0.3s ease;
 }
 
 .toggleFill:checked + label {
-  background-color: #4caf50; /* Green when checked */
+  background-color: #e4c024; /* Yellow when checked */
 }
 
 .toggleFill:checked + label::before {
