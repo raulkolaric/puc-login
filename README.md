@@ -18,7 +18,7 @@ to be made
 <!-- <img src="preview.gif" alt="PUC-SP AutoLogin Demo" width="300"/> -->
 
 ## 📁 File Structure
-
+```
 PUCLogin/
 ├── public/
 │ └── puc-main.png
@@ -26,16 +26,13 @@ PUCLogin/
 │ ├── main.html # Popup UI
 │ ├── main.css # Custom styling
 │ └── input.js # Autofill + toggle logic
+| └── contentScript.js # Script logic
 ├── manifest.json # Chrome extension config
 └── README.md # This file
-
-pgsql
-Copy
-Edit
-
+```
 ## 🔧 How to Use (Dev Mode)
 
-1. Clone or download this repository.
+1. Clone or download this repository. 
 2. Open **Chrome** and go to `chrome://extensions/`.
 3. Enable **Developer Mode** (top right).
 4. Click **“Load unpacked”** and select the extension folder.
@@ -58,5 +55,6 @@ No external servers, no trackers, no data leaks.
 Unlicense license
 
 ---
-
-Made with PUC-SP students in mind.
+<p align="center">
+  Made with my fellow PUC-SP students in mind.
+</p>
