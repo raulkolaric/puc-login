@@ -1,14 +1,24 @@
 {
-  "name": "PUC-SP Login",
+  "name": "PucLogin",
   "description": "Automatic login to PUC-SP",
   "version": "1.0",
   "manifest_version": 3,
   "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": [
+    "https://portal.fundasp.org.br/FrameHTML/web/app/edu/PortalEducacional/login/*"
+  ],
   "action": {
     "default_popup": "src/main.html",
     "default_icon": "public/puc128.png"
   },
   "background": {
-    "service_worker": "src/background.js"
+    "service_worker": "src/input.js"
+  },
+  "content_scripts": [
+  {
+    "matches": ["https://portal.fundasp.org.br/FrameHTML/web/app/edu/PortalEducacional/login/*"],
+    "js": ["src/contentScript.js"],
+    "run_at": "document_idle"
   }
+]
 }

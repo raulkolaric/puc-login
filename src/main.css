@@ -18,7 +18,7 @@ body {
     padding-top: 10px;
 }
 
-.login input{
+.login-input input{
     background-color: #0c143a;
     border-radius: 10px;
     height: 30px;
@@ -27,22 +27,69 @@ body {
     border-style: solid;
     color: aliceblue;
     transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    display: grid;
+    gap: 5px;
 }
 
-.login input::placeholder {
+.login-input input::placeholder {
     color: rgb(150, 162, 175);
     font-style: italic;
     font-family: 'Poppins', sans-serif;
     
 }
 
-.login input:focus {
+.login-input input:focus {
     outline: none;
     border-color: aliceblue;
     transform: scale(1.03);
 }
 
-.login-input {
-    display: grid;
+.container {
+    display: flex;
+    align-items: center;
     gap: 5px;
+    padding-top: 7px;
+}
+
+.container h2 {
+  margin: 0;
+}
+
+
+.toggleFill {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.toggleFill + label {
+  position: relative;
+  display: inline-block;
+  width: 26px;
+  height: 14px;
+  background-color: #ccc;
+  border-radius: 17px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggleFill + label::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.toggleFill:checked + label {
+  background-color: #4caf50;
+}
+
+.toggleFill:checked + label::before {
+  transform: translateX(12px);
 }
