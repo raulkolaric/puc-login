@@ -1,24 +1,43 @@
 {
   "name": "PucLogin",
-  "description": "Automatic login to PUC-SP",
-  "version": "1.0",
+  "description": "Automatic login and redirects for PUC-SP portals.",
+  "version": "1.1",
   "manifest_version": 3,
-  "permissions": ["storage", "activeTab", "scripting"],
+  "permissions": [
+    "storage",
+    "scripting",
+    "webNavigation"
+  ],
   "host_permissions": [
-    "https://portal.fundasp.org.br/FrameHTML/web/app/edu/PortalEducacional/login/*"
+    "https://portal.fundasp.org.br/FrameHTML/web/app/edu/PortalEducacional/login/*",
+    "https://portal.fundasp.org.br/*",
+    "http://portal.fundasp.org.br/*",
+    "https://www.pucsp.br/*",
+    "http://www.pucsp.br/*"
   ],
   "action": {
     "default_popup": "src/main.html",
-    "default_icon": "public/puc128.png"
+    "default_icon": {
+      "16": "public/puc_icon16.png",
+      "32": "public/puc_icon32.png",
+      "48": "public/puc_icon48.png",
+      "128": "public/puc128.png"
+    }
   },
   "background": {
-    "service_worker": "src/input.js"
+    "service_worker": "background.js"
   },
   "content_scripts": [
-  {
-    "matches": ["https://portal.fundasp.org.br/FrameHTML/web/app/edu/PortalEducacional/login/*"],
-    "js": ["src/contentScript.js"],
-    "run_at": "document_idle"
+    {
+      "matches": ["https://portal.fundasp.org.br/FrameHTML/web/app/edu/PortalEducacional/login/*"],
+      "js": ["src/contentScript.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "public/puc_icon16.png",
+    "32": "public/puc_icon32.png",
+    "48": "public/puc_icon48.png",
+    "128": "public/puc128.png"
   }
-]
 }
